@@ -17,3 +17,9 @@ test('Flat json files', () => {
   const resultFile = readFile('flat-result.txt');
   expect(genDiff(firstFile, secondFile)).toBe(resultFile);
 });
+test('Flat yml files', () => {
+  const firstFile = getFixturePath('flat1.yml');
+  const secondFile = getFixturePath('flat2.yml');
+  const resultFile = readFile('flat-result.txt');
+  expect(genDiff(firstFile, secondFile)).toBe(resultFile);
+});
