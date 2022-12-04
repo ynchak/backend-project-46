@@ -1,5 +1,5 @@
-import _ from 'lodash'
-import { getData, getFilePath } from "./utils.js";
+import _ from 'lodash';
+import { getData, getFilePath } from './utils.js';
 
 const makeDiff = (data1, data2) => {
   const keys = _.union(Object.keys(data1), Object.keys(data2)).sort();
@@ -16,10 +16,10 @@ const makeDiff = (data1, data2) => {
     return [
       { status: 'removed', key: [key], value: data1[key] },
       { status: 'added', key: [key], value: data2[key] },
-    ]
+    ];
   });
   return diff;
-}
+};
 
 const diffToString = (diff) => diff.map((item) => {
   const { status, key, value } = item;
@@ -29,16 +29,16 @@ const diffToString = (diff) => diff.map((item) => {
     case 'removed':
       return `  - ${key}: ${value}`;
     case 'unchanged':
-      return `    ${key}: ${value}`
+      return `    ${key}: ${value}`;
     default:
-      break;
+      throw new Error(`unkwon status: ${status}`);
   }
 }).join('\n');
 
 const genDiff = (fileToPath1, fileToPath2) => {
   const [file1, file2] = [getFilePath(fileToPath1), getFilePath(fileToPath2)];
   const [data1, data2] = [getData(file1), getData(file2)];
-  const diff =  makeDiff(data1, data2);
+  const diff = makeDiff(data1, data2);
   return `{\n${diffToString(diff)}\n}`;
-}
+};
 export default genDiff;
