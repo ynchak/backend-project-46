@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { getData, getFile } from "./utils.js";
+import { getData, getFilePath } from "./utils.js";
 
 const makeDiff = (data1, data2) => {
   const keys = _.union(Object.keys(data1), Object.keys(data2)).sort();
@@ -36,7 +36,7 @@ const diffToString = (diff) => diff.map((item) => {
 }).join('\n');
 
 const genDiff = (fileToPath1, fileToPath2) => {
-  const [file1, file2] = [getFile(fileToPath1), getFile(fileToPath2)];
+  const [file1, file2] = [getFilePath(fileToPath1), getFilePath(fileToPath2)];
   const [data1, data2] = [getData(file1), getData(file2)];
   const diff =  makeDiff(data1, data2);
   return `{\n${diffToString(diff)}\n}`;
