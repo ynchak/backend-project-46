@@ -1,6 +1,6 @@
 import { getData, getFilePath } from './utils.js';
 import makeDiff from './makeDiff.js';
-import formatOutput from './formaters/index.js';
+import formatOutput from './formatters/index.js';
 
 const genDiff = (fileToPath1, fileToPath2, format = 'stylish') => {
   const [file1, file2] = [getFilePath(fileToPath1), getFilePath(fileToPath2)];
