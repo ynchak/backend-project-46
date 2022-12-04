@@ -1,44 +1,11 @@
-import _ from 'lodash';
 import { getData, getFilePath } from './utils.js';
+import makeDiff from './makeDiff.js';
+import formatOutput from './formaters/index.js';
 
-const makeDiff = (data1, data2) => {
-  const keys = _.union(Object.keys(data1), Object.keys(data2)).sort();
-  const diff = keys.flatMap((key) => {
-    if (!_.has(data1, key)) {
-      return { status: 'added', key: [key], value: data2[key] };
-    }
-    if (!_.has(data2, key)) {
-      return { status: 'removed', key: [key], value: data1[key] };
-    }
-    if (data1[key] === data2[key]) {
-      return { status: 'unchanged', key: [key], value: data1[key] };
-    }
-    return [
-      { status: 'removed', key: [key], value: data1[key] },
-      { status: 'added', key: [key], value: data2[key] },
-    ];
-  });
-  return diff;
-};
-
-const diffToString = (diff) => diff.map((item) => {
-  const { status, key, value } = item;
-  switch (status) {
-    case 'added':
-      return `  + ${key}: ${value}`;
-    case 'removed':
-      return `  - ${key}: ${value}`;
-    case 'unchanged':
-      return `    ${key}: ${value}`;
-    default:
-      throw new Error(`unkwon status: ${status}`);
-  }
-}).join('\n');
-
-const genDiff = (fileToPath1, fileToPath2) => {
+const genDiff = (fileToPath1, fileToPath2, format = 'stylish') => {
   const [file1, file2] = [getFilePath(fileToPath1), getFilePath(fileToPath2)];
   const [data1, data2] = [getData(file1), getData(file2)];
   const diff = makeDiff(data1, data2);
-  return `{\n${diffToString(diff)}\n}`;
+  return formatOutput(diff, format);
 };
 export default genDiff;
