@@ -12,13 +12,12 @@ const makeDiff = (data1, data2) => {
     if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
       return { status: 'nested', key, children: makeDiff(data1[key], data2[key]) };
     }
-    if (data1[key] === data2[key]) {
-      return { status: 'unchanged', key, value: data1[key] };
+    if (data1[key] !== data2[key]) {
+      return {
+        status: 'updated', key, fromValue: data1[key], toValue: data2[key],
+      };
     }
-    return [
-      { status: 'removed', key, value: data1[key] },
-      { status: 'added', key, value: data2[key] },
-    ];
+    return { status: 'unchanged', key, value: data1[key] };
   });
   return diff;
 };

@@ -18,9 +18,9 @@ const stringify = (data, depth) => {
 
 const stylish = (tree) => {
   const iter = (node, depth) => {
-    const lines = node.map((data) => {
+    const lines = node.flatMap((data) => {
       const {
-        status, key, value, children,
+        status, key, value, children, fromValue, toValue,
       } = data;
 
       switch (status) {
@@ -36,6 +36,11 @@ const stylish = (tree) => {
         case 'unchanged': {
           return `${getIndent(depth)}  ${key}: ${stringify(value, depth + 1)}`;
         }
+        case 'updated':
+          return [
+            `${getIndent(depth)}- ${key}: ${stringify(fromValue, depth + 1)}`,
+            `${getIndent(depth)}+ ${key}: ${stringify(toValue, depth + 1)}`,
+          ];
         default:
           throw new Error(`Type ${status} is unknown`);
       }
