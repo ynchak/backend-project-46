@@ -1,8 +1,9 @@
 import stylish from './stylish.js';
+import plain from './plain.js';
 
 const formatters = {
   stylish,
-  // 'plain': plain,
+  plain,
 };
 
 const formatOutput = (diff, format) => {
