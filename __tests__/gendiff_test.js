@@ -47,3 +47,15 @@ test('Nested yaml files output plain', () => {
   const resultFile = readFile('plain-result.txt');
   expect(genDiff(firstFile, secondFile, 'plain')).toBe(resultFile);
 });
+test('Nested yaml files output json', () => {
+  const firstFile = getFixturePath('nested-file1.yaml');
+  const secondFile = getFixturePath('nested-file2.yaml');
+  const resultFile = readFile('json-result.txt');
+  expect(genDiff(firstFile, secondFile, 'json')).toBe(resultFile);
+});
+test('Nested json files output json', () => {
+  const firstFile = getFixturePath('nested-file1.json');
+  const secondFile = getFixturePath('nested-file2.json');
+  const resultFile = readFile('json-result.txt');
+  expect(genDiff(firstFile, secondFile, 'json')).toBe(resultFile);
+});
