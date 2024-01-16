@@ -13,6 +13,6 @@ jobs:
       - name: install dependency
         run: make install
       - name: run lint
-        uses: make lint
+        run: make lint
       - name: run tests
-        uses: make test
+        run: make test
