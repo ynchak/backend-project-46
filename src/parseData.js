@@ -12,4 +12,4 @@ const getParseData = (filePath) => {
   const data = readFileSync(fullFilePath);
   return parse(data, ext);
 };
-export { getParseData };
+export default getParseData;

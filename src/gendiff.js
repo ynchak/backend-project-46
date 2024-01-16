@@ -1,4 +1,4 @@
-import { getParseData } from './parseData.js';
+import getParseData from './parseData.js';
 
 const statuses = {
   added: '+',
