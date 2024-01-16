@@ -1,0 +1,19 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone repo
+        uses: actions/checkout@v4
+      - name: use Node.js
+        uses: actions/setup-node@v4
+      - name: install dependency
+        run: make install
+      - name: run lint
+        uses: make lint
+      - name: run tests
+        uses: make test
+      
