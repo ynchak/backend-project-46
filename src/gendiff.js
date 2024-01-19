@@ -10,7 +10,7 @@ const diffToString = (diff) => {
   const lines = diff.map(
     ({ status, name, value }) => `  ${statuses[status]} ${name}: ${value}\n`
   );
-  return ['{\n', ...lines, '\n}'].join('');
+  return ['{\n', ...lines, '}'].join('');
 };
 
 const has = (obj, prop) => Object.hasOwn(obj, prop);
