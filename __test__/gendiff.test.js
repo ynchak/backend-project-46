@@ -14,8 +14,20 @@ beforeEach(() => {
   const resultFile = getFixturePath('resultFlat.txt');
   result = readFileSync(resultFile, 'utf8');
 });
-test('flat json test', () => {
+test('struct flat: File type json', () => {
   const file1 = getFixturePath('file1.json');
   const file2 = getFixturePath('file2.json');
+  expect(genDiff(file1, file2)).toBe(result);
+});
+
+test('struct flat: File type yml', () => {
+  const file1 = getFixturePath('file1.yml');
+  const file2 = getFixturePath('file2.yml');
+  expect(genDiff(file1, file2)).toBe(result);
+});
+
+test('struct flat: File type first yml second json', () => {
+  const file1 = getFixturePath('file1.json');
+  const file2 = getFixturePath('file2.yml');
   expect(genDiff(file1, file2)).toBe(result);
 });
