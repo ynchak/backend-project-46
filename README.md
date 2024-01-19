@@ -5,22 +5,22 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/d42c020c6c3a0131cc90/maintainability)](https://codeclimate.com/github/ynchak/backend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d42c020c6c3a0131cc90/test_coverage)](https://codeclimate.com/github/ynchak/backend-project-46/test_coverage)
 
-**Вычислитель отличий** – программа, определяющая разницу между двумя структурами данных.
+**gendiff** – the program that determines the difference between two data structures
 
-Возможности утилиты:
+Features:
 
-- Поддержка разных входных форматов: `yaml`, `json`
-- Генерация отчета в виде `plain text`, `stylish` и `json`
+- Supports different input type files: `yaml`, `json`
+- Generates a report in the format of: `plain text`, `stylish` and `json`
 
 ```console
-# формат plain
+# format plain
 gendiff --format plain path/to/file.yml another/path/file.json
 
 Property 'common.follow' was added with value: false
 Property 'group1.baz' was updated. From 'bas' to 'bars'
 Property 'group2' was removed
 
-# формат stylish
+# format stylish
 gendiff filepath1.json filepath2.json
 
 {
