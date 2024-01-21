@@ -11,23 +11,15 @@ const getFixturePath = (filename) =>
   join(__dirname, '..', '__fixtures__', filename);
 let result;
 beforeEach(() => {
-  const resultFile = getFixturePath('resultFlat.txt');
+  const resultFile = getFixturePath('result.txt');
   result = readFileSync(resultFile, 'utf8');
 });
-test('struct flat: File type json', () => {
-  const file1 = getFixturePath('file1.json');
-  const file2 = getFixturePath('file2.json');
-  expect(genDiff(file1, file2)).toBe(result);
-});
 
-test('struct flat: File type yml', () => {
-  const file1 = getFixturePath('file1.yml');
-  const file2 = getFixturePath('file2.yml');
-  expect(genDiff(file1, file2)).toBe(result);
-});
-
-test('struct flat: File type first yml second json', () => {
-  const file1 = getFixturePath('file1.json');
-  const file2 = getFixturePath('file2.yml');
-  expect(genDiff(file1, file2)).toBe(result);
+it.each([
+  ['json', 'json'],
+  ['yml', 'yml'],
+])('gendiff(%s, %s, %s)', (ext1, ext2, format = 'stylish') => {
+  const pathTofile1 = getFixturePath(`file1.${ext1}`);
+  const pathTofile2 = getFixturePath(`file2.${ext2}`);
+  expect(genDiff(pathTofile1, pathTofile2, format)).toEqual(result);
 });
