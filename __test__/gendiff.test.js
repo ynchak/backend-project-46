@@ -18,6 +18,8 @@ beforeEach(() => {
 it.each([
   ['json', 'json'],
   ['yml', 'yml'],
+  ['json', 'json', 'stylish'],
+  ['yml', 'yml', 'stylish'],
 ])('gendiff(%s, %s, %s)', (ext1, ext2, format = 'stylish') => {
   const pathTofile1 = getFixturePath(`file1.${ext1}`);
   const pathTofile2 = getFixturePath(`file2.${ext2}`);
