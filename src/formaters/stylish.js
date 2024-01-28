@@ -19,24 +19,25 @@ export default (data) => {
     const lastIndent = ' '.repeat(spaceCount * (depth - 1));
     const entries = Object.entries(diff);
     const lines = entries.flatMap(([key, { status, value, valueAfter }]) => {
+      const newDepth = depth + 1;
       switch (status) {
         case 'added': {
-          return `${indent}+ ${key}: ${stringify(value, depth + 1)}`;
+          return `${indent}+ ${key}: ${stringify(value, newDepth)}`;
         }
         case 'removed': {
-          return `${indent}- ${key}: ${stringify(value, depth + 1)}`;
+          return `${indent}- ${key}: ${stringify(value, newDepth)}`;
         }
         case 'unchanged': {
-          return `${indent}  ${key}: ${stringify(value, depth + 1)}`;
+          return `${indent}  ${key}: ${stringify(value, newDepth)}`;
         }
         case 'updated': {
           return [
-            `${indent}- ${key}: ${stringify(value, depth + 1)}`,
-            `${indent}+ ${key}: ${stringify(valueAfter, depth + 1)}`,
+            `${indent}- ${key}: ${stringify(value, newDepth)}`,
+            `${indent}+ ${key}: ${stringify(valueAfter, newDepth)}`,
           ];
         }
         case 'nested': {
-          return `${indent}  ${key}: ${stringify(stylish(value, depth + 1))}`;
+          return `${indent}  ${key}: ${stringify(stylish(value, newDepth))}`;
         }
         default:
           throw new Error('');

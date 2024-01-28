@@ -1,14 +1,13 @@
-import parseYaml from './parseYml.js';
-import parseJson from './parseJson.js';
+import { load } from 'js-yaml';
 
 const parse = (data, ext) => {
   switch (ext) {
     case '.json': {
-      return parseJson(data);
+      return JSON.parse(data);
     }
     case '.yml':
     case '.yaml': {
-      return parseYaml(data);
+      return load(data);
     }
     default: {
       throw new Error(`Unknown ext ${ext}`);

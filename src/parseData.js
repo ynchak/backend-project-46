@@ -2,7 +2,7 @@ import { resolve, extname } from 'node:path';
 import { cwd } from 'node:process';
 import { readFileSync } from 'node:fs';
 
-import parse from './parses/index.js';
+import parse from './parse.js';
 
 const getFullFilePath = (filePath) => resolve(cwd(), filePath);
 const getExtFile = (fileName) => extname(fileName);
