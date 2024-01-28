@@ -1,10 +1,13 @@
+import { has } from 'lodash-es';
 import stylish from './stylish.js';
 
+const formats = {
+  stylish,
+}
 export default (diff, format) => {
-  switch (format) {
-    case 'stylish':
-      return stylish(diff);
-    default:
-      throw new Error(`Unknown format: ${format}`);
+  if (!has(formats, format)) {
+    throw new Error(`Unknown format: ${format}`)
   }
-};
+  const formater = formats[format];
+  return formater(diff)
+}
